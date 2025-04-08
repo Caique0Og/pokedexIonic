@@ -1,0 +1,38 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-title>
+      Pokédex
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-grid fixed>
+    <ion-row>
+      <ion-col size="12" class="ion-text-center">
+        <h1>Lista de Pokémons</h1>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col size="6" size-md="4" size-lg="3" *ngFor="let pokemon of pokemons">
+        <ion-card button (click)="showPokemonDetails(getPokemonId(pokemon.url))" class="pokemon-card">
+          <ion-img [src]="getPokemonImage(getPokemonId(pokemon.url))" [alt]="pokemon.name"
+            class="pokemon-image"></ion-img>
+
+          <ion-card-header>
+            <ion-card-title>
+              #{{ getPokemonId(pokemon.url) | number:'3.0-0' }} -
+              {{ pokemon.name | titlecase }}
+            </ion-card-title>
+          </ion-card-header>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-infinite-scroll (ionInfinite)="loadMorePokemons($event)">
+    <ion-infinite-scroll-content loadingSpinner="bubbles"
+      loadingText="Carregando mais Pokémons..."></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</ion-content>

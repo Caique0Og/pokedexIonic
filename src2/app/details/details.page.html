@@ -1,0 +1,27 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Detalhes do Pokémon</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card *ngIf="pokemonDetails" >
+    <ion-img [src]="getPokemonImage(pokemonDetails.id)" class="img"></ion-img>
+
+    <ion-card-header>
+      <ion-card-title>
+        #{{ pokemonDetails.id | number:'3.0-0' }} -
+        {{ pokemonDetails.name | titlecase }}
+      </ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      <h3>Estatísticas</h3>
+      <ion-list>
+        <ion-item *ngFor="let stat of pokemonDetails.stats">
+          {{ stat.stat.name | titlecase }}: {{ stat.base_stat }}
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
